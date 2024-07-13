@@ -99,30 +99,32 @@ main {
 }
 
 button.check-fact {
-    background-color: #007bff; /* Blue */
+    background-color: #007bff;  
     color: #fff;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
     font-size: 16px;
     margin-right: 10px; /* Adds space between the two buttons */
+    border-radius: 4px;
 }
 
 button.check-fact:hover {
-    background-color: #0056b3; /* Darker blue for hover effect */
+    background-color: #0056b3;  
 }
 
 button.reset {
-    background-color: darksalmon; /* Gray */
+    background-color: darksalmon;  
     color: #fff;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
     font-size: 16px;
+    border-radius: 4px;
 }
 
 button.reset:hover {
-    background-color: salmon; /* Darker gray for hover effect */
+    background-color: salmon;  
 }
 
 .results-section {
@@ -165,16 +167,17 @@ button.reset:hover {
 }
 
 button.summarize {
-    background-color: #28a745; /* Green */
+    background-color: #28a745;  
     color: #fff;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
     font-size: 16px;
+    border-radius: 4px;
 }
 
 button.summarize:hover {
-    background-color: #218838; /* Darker green for hover effect */
+    background-color: #218838;  
 }
 
 .progress-bar {
@@ -198,7 +201,7 @@ button.summarize:hover {
 }
 
 .summary {
-    font-family: 'BBC Reith Serif', Arial, sans-serif;
+    font-family: 'Georgia', 'Times New Roman', serif; /* A professional, news-like font */
     font-size: 16px;
     color: #333;
     background-color: #f9f9f9;
@@ -207,4 +210,5 @@ button.summarize:hover {
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    text-indent: 40px;  /* Added indentation for the summary texts */
 }
