@@ -1,6 +1,6 @@
 // Object to store API keys
 const apiKeys = {
-    newsApiKey: 'd33534e32a2e4e91ab519acfb9ab8b42', // Setup value of apiKey with your actual News API key
+    newsdataApiKey: 'pub_48526852547f7a14aff65b94321d84248d0d6', // Setup value of apiKey with your actual NewsData.io API key
     meaningCloudApiKey: '3cad836143b352a37661657d43213759' // Replace with your actual MeaningCloud API key
 };
 
@@ -30,14 +30,14 @@ function createResultElement(article, index) {
     resultElement.classList.add('result');
     resultElement.innerHTML = `
         <h2>${article.title}</h2>
-        <p><strong>Source:</strong> ${article.source.name}</p>
-        <p><strong>Author:</strong> ${article.author}</p>
-        <p><strong>Published At:</strong> ${new Date(article.publishedAt).toLocaleDateString()}</p>
+        <p><strong>Source:</strong> ${article.source_id}</p>
+        <p><strong>Author:</strong> ${article.creator ? article.creator.join(', ') : 'Unknown'}</p>
+        <p><strong>Published At:</strong> ${new Date(article.pubDate).toLocaleDateString()}</p>
         <p>${article.description}</p>
-        <img src="${article.urlToImage}" alt="news" class="centerToImage">
-        <p class="readMore"><a href="${article.url}" target="_blank">Read more</a></p>
+        <img src="${article.image_url || 'placeholder.jpg'}" alt="news" class="centerToImage">
+        <p class="readMore"><a href="${article.link}" target="_blank">Read more</a></p>
         <div class="summarize-container">
-            <button class="summarize" onclick="summarizeArticle('${article.url}', this, 'progressBar-${index}')">Summarize</button>
+            <button class="summarize" onclick="summarizeArticle('${article.link}', this, 'progressBar-${index}')">Summarize</button>
         </div>
         <div class="summary"></div>
         <div id="progressBar-${index}" class="progress-bar" style="display: none;">
@@ -53,7 +53,7 @@ function displayResults(data) {
     clearPreviousResults();
 
     // Check if there are no articles and display an error message if so
-    if (!data.articles || data.articles.length === 0) {
+    if (!data.results || data.results.length === 0) {
         displayError('No results found. Please try a different query.');
         return;
     }
@@ -62,10 +62,8 @@ function displayResults(data) {
     const resultsSection = document.getElementById('results');
     
     // Loop through each article and append the result element to the results section
-    data.articles.forEach((article, index) => {
-        if (article.title !== '[Removed]') {
-            resultsSection.appendChild(createResultElement(article, index));
-        }
+    data.results.forEach((article, index) => {
+        resultsSection.appendChild(createResultElement(article, index));
     });
 }
 
@@ -118,13 +116,11 @@ document.getElementById('factCheckForm').addEventListener('submit', async functi
     // Show the progress bar
     toggleProgressBar(true);
 
-    // Get the query, sort option, and language from the form inputs
+    // Get the query from the form input
     const query = document.getElementById('query').value;
-    const sortOption = document.querySelector('input[name="sort"]:checked').value;
-    const language = document.getElementById('language').value;
     
-    // Construct the API URL for fetching news articles
-    const apiUrl = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&sortBy=${sortOption}&language=${language}&apiKey=${apiKeys.newsApiKey}`;
+    // Construct the API URL for fetching news articles from NewsData.io
+    const apiUrl = `https://newsdata.io/api/1/news?apikey=${apiKeys.newsdataApiKey}&q=${encodeURIComponent(query)}&size=10`;
 
     try {
         // Fetch the news articles data
