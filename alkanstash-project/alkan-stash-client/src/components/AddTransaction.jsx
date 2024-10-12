@@ -19,7 +19,7 @@ const AddTransaction = () => {
     } else {
       const fetchJarName = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/api/jars/${userId}/${jarId}`);
+          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/jars/${userId}/${jarId}`);
           setJarName(response.data.jarName);
           localStorage.setItem(`jarName_${jarId}`, response.data.jarName);
         } catch (err) {
@@ -40,7 +40,7 @@ const AddTransaction = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/api/transactions', {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/transactions`, {
         userId,
         jarId,
         transactionType,

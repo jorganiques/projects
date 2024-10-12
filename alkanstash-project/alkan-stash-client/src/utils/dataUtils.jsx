@@ -15,7 +15,7 @@ export const getUserDataFromLocalStorage = () => {
   
   export const fetchUserJars = async (userId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/jars/${userId}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/jars/${userId}`);
       return response.data.filter(jar => !jar.isDeleted); // Filter non-deleted jars
     } catch (error) {
       throw new Error('Failed to fetch jars.');
@@ -24,7 +24,7 @@ export const getUserDataFromLocalStorage = () => {
   
   export const fetchUserTransactions = async (userId, jarId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/transactions/${userId}/${jarId}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/transactions/${userId}/${jarId}`);
       return response.data;
     } catch (error) {
       throw new Error('Failed to fetch transactions.');

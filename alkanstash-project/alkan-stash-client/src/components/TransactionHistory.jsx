@@ -14,7 +14,7 @@ const TransactionHistory = () => {
     const fetchTransactions = async () => {
       try {
         // Updated endpoint to use userId and jarId
-        const response = await axios.get(`http://localhost:5000/api/transactions/${userId}/${jarId}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/transactions/${userId}/${jarId}`);
         setTransactions(response.data); // Set the fetched transactions to state
       } catch (err) {
         setError(err.response?.data?.message || 'Failed to fetch transactions');

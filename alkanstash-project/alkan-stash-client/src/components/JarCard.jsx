@@ -16,7 +16,7 @@ const JarCard = ({ jar, onJarDeleted }) => {
 
       try {
         // Use userId and jarId in the GET request
-        const transactionsResponse = await axios.get(`http://localhost:5000/api/transactions/${userId}/${jar.jarId}`);
+        const transactionsResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/transactions/${userId}/${jar.jarId}`);
         const transactions = transactionsResponse.data;
 
         if (transactions.length === 0) {
@@ -45,12 +45,12 @@ const JarCard = ({ jar, onJarDeleted }) => {
     if (window.confirm(`Are you sure you want to delete the jar "${jar.jarName}"?`)) {
       try {
         // Use userId and jarId in the DELETE request
-        const jarDeleteResponse = await axios.delete(`http://localhost:5000/api/jars/${userId}/${jar.jarId}`);
+        const jarDeleteResponse = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/jars/${userId}/${jar.jarId}`);
         console.log('Jar delete response:', jarDeleteResponse);
 
         // Only attempt to delete transactions if they exist
         if (transactionsExist) {
-          const transactionsDeleteResponse = await axios.delete(`http://localhost:5000/api/transactions/${userId}/${jar.jarId}`);
+          const transactionsDeleteResponse = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/transactions/${userId}/${jar.jarId}`);
           console.log('Transactions delete response:', transactionsDeleteResponse);
         }
 

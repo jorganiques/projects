@@ -10,7 +10,7 @@ const Login = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', values);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`, values);
       localStorage.setItem('userId', response.data.userId);
       localStorage.setItem('username', values.username);
       navigate('/dashboard', { state: { userId: response.data.userId } });

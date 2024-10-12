@@ -18,7 +18,7 @@ const EditJar = () => {
     const fetchJarDetails = async () => {
       try {
         // Use userId and jarId in the GET request
-        const response = await axios.get(`http://localhost:5000/api/jars/${userId}/${jarId}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/jars/${userId}/${jarId}`);
         const jar = response.data;
         setName(jar.name);
         setTargetAmount(jar.targetAmount || 0);   
@@ -37,7 +37,7 @@ const EditJar = () => {
 
     try {
       // Use userId and jarId in the PUT request
-      await axios.put(`http://localhost:5000/api/jars/${userId}/${jarId}`, {
+      await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/jars/${userId}/${jarId}`, {
         targetAmount: targetAmount || 0,   
         notes: notes || '',   
       });

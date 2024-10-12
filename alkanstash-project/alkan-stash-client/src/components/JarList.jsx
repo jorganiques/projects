@@ -11,7 +11,7 @@ const JarList = ({ onJarDeleted }) => {
   useEffect(() => {
     const fetchUserId = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/auth/user/${username}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/auth/user/${username}`);
         const user = response.data;
 
         if (user && user.userId) {
@@ -32,7 +32,7 @@ const JarList = ({ onJarDeleted }) => {
       }
 
       try {
-        const response = await axios.get(`http://localhost:5000/api/jars/${userId}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/jars/${userId}`);
         const filteredJars = response.data.filter(jar => !jar.isDeleted);
         setJars(filteredJars);
         setError(filteredJars.length === 0 ? 'No jars found.' : '');

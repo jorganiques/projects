@@ -16,7 +16,7 @@ const SavingsJarForm = () => {
   useEffect(() => {
     const fetchUserId = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/auth/user/${username}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/auth/user/${username}`);
         setUserId(response.data.userId);
       } catch (error) {
         setError('Failed to retrieve user ID.');
@@ -45,7 +45,7 @@ const SavingsJarForm = () => {
         userId
       };
 
-      await axios.post('http://localhost:5000/api/jars', jarData);
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/jars`, jarData);
       
       // Set success message
       setSuccessMessage('Savings jar created successfully!');
