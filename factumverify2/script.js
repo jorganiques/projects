@@ -118,9 +118,17 @@ document.getElementById('factCheckForm').addEventListener('submit', async functi
 
     // Get the query from the form input
     const query = document.getElementById('query').value;
+
+    // Get the selected language from the dropdown
+    const language = document.getElementById('language').value;
     
     // Construct the API URL for fetching news articles from NewsData.io
-    const apiUrl = `https://newsdata.io/api/1/news?apikey=${apiKeys.newsdataApiKey}&q=${encodeURIComponent(query)}&size=10`;
+    let apiUrl = `https://newsdata.io/api/1/news?apikey=${apiKeys.newsdataApiKey}&qInTitle=${encodeURIComponent(query)}&size=10`;
+    
+    if (language) {
+        apiUrl += `&language=${encodeURIComponent(language)}`; // Append language parameter if selected
+    }
+    
 
     try {
         // Fetch the news articles data
